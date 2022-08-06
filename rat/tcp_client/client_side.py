@@ -5,6 +5,12 @@ import socket
 # Importing the termcolor module to print colored text
 from termcolor import colored
 
+
+def send_both(client, text):
+    client.send(bytes('\r\n'+text, 'UTF-8'))
+    print(text)
+
+
 # Method to call from other python files
 def main(target_host, target_port):
     try:
@@ -15,12 +21,10 @@ def main(target_host, target_port):
 
         # Connect to client with {Target_host, Target_port}
         client.connect((target_host, target_port))
-
-        # Send testing data using byte encoding
-        client.send(b'GET / HTTP/1.1\nHOST:google.com\n\n')
+        print(colored('Successfully Connected!', 'green'))
+        response = client.recv(4096)
 
         # Receive Data and print to terminal (Testing)
-        response = client.recv(4096)
         if response:
             print(colored('Successfully received a response from target host.', 'green'))
             print(colored('-----------------------RESPONSE-----------------------', 'blue'))
@@ -28,9 +32,24 @@ def main(target_host, target_port):
         else:
             print(colored('Did not receive Response from target host.', 'red'))
 
+        response_ = client.recv(4096).decode('UTF-8')
+        author = ''
+        if response_ == "Author > ":
+            author = input("Author > ")
+
+        while True:
+            response = client.recv(4096)
+            response = response.decode('UTF-8')
+
+            if response == "Message > ":
+                message = input("Message > ")
+                complete_message = author + ' > ' + message
+                print(complete_message)
+            else:
+                print(response)
+
     except KeyboardInterrupt:
         print('Program forcefully stopped.')
 
 
-main('localhost', 80)
-print('Successfully Connected!')
+main('localhost', 50)

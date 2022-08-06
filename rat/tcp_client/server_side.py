@@ -3,11 +3,6 @@ import socket
 from termcolor import colored
 
 
-def send_both(client, text):
-    client.send(bytes('\r\n'+text, 'UTF-8'))
-    print(text)
-
-
 def main(listening_port):
     print('This program will setup a Listener at the following port: {0}'.format(listening_port))
 
@@ -22,15 +17,14 @@ def main(listening_port):
     client_, addr = client.accept()
     # Opening a channel to communicate
     client_.send(bytes('Type "e" to exit anytime', 'UTF-8'))
-
+    client_.send(bytes("\r\nAuthor > ", 'UTF-8'))
     author = input("Author > ")
-    client_.send(bytes("Author > ", 'UTF-8'))
+
     print(colored('WARNING: You cannot change the value of Author later.', 'yellow'))
 
     while True:
         message = input("Message > ")
-        client_.send(bytes("Author > ", 'UTF-8'))
-
+        response = client.recv(4096).decode('UTF-8')
         if message == 'e':
             break
 

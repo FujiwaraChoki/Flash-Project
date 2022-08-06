@@ -6,11 +6,6 @@ import socket
 from termcolor import colored
 
 
-def send_both(client, text):
-    client.send(bytes('\r\n'+text, 'UTF-8'))
-    print(text)
-
-
 # Method to call from other python files
 def main(target_host, target_port):
     try:
@@ -22,13 +17,13 @@ def main(target_host, target_port):
         # Connect to client with {Target_host, Target_port}
         client.connect((target_host, target_port))
         print(colored('Successfully Connected!', 'green'))
-        response = client.recv(4096)
+        response__ = client.recv(4096).decode('UTF-8')
 
         # Receive Data and print to terminal (Testing)
-        if response:
+        if response__ != '':
             print(colored('Successfully received a response from target host.', 'green'))
             print(colored('-----------------------RESPONSE-----------------------', 'blue'))
-            print(response)
+            print(response__)
         else:
             print(colored('Did not receive Response from target host.', 'red'))
 
@@ -47,6 +42,9 @@ def main(target_host, target_port):
                 print(complete_message)
             else:
                 print(response)
+                message = input("Message > ")
+                complete_message = author + ' > ' + message
+                client.send(bytes(complete_message, 'UTF-8'))
 
     except KeyboardInterrupt:
         print('Program forcefully stopped.')

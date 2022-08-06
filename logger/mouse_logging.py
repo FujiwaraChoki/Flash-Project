@@ -18,7 +18,7 @@ mouse_logo = open("mouse_logo.txt", "r")
 logo = mouse_logo.read()
 
 cwd = os.getcwd()
-log_directory = os.path.join(cwd, "logger/Key_logs")
+log_directory = os.path.join(cwd, "Key_logs")
 if not os.path.exists(log_directory):
     os.makedirs(log_directory)
 
@@ -35,11 +35,11 @@ def setup_logger(name, log_file, level=logging.INFO):
     return logger
 
 
-mouse_logger = setup_logger('mouse_logger', 'logger/Key_logs/mouse_logs.txt')
+mouse_logger = setup_logger('mouse_logger', 'Key_logs/mouse_logs.txt')
 mouse_logger.info("Date: " + str(dateNow)+"\n")
 mouse_logger.info("Time: "+str(timeNow)+"\n\n\n\n\n")
 
-logs = open("logger/Key_logs/mouse_logs.txt", "a")
+logs = open("Key_logs/mouse_logs.txt", "a")
 logs.truncate(0)
 mouse_logger.info(logo)
 

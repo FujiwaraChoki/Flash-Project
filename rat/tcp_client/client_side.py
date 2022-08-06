@@ -29,19 +29,22 @@ def main(target_host, target_port):
 
         response_ = client.recv(4096).decode('UTF-8')
         author = ''
-        if response_ == "Author > ":
+        if response_ == "\r\nAuthor > ":
             author = input("Author > ")
 
         while True:
             response = client.recv(4096)
-            response = response.decode('UTF-8')
-
-            if response == "Message > ":
+            if response:
+                if not response == '\r\nAuthor > ' or response == '\r\nMessage > ':
+                    print(response.decode('UTF-8'))
                 message = input("Message > ")
                 complete_message = author + ' > ' + message
                 print(complete_message)
+
+                # If Server Response
+                if response == "\r\nMessage > ":
+                    client.send(bytes(complete_message, 'UTF_8'))
             else:
-                print(response)
                 message = input("Message > ")
                 complete_message = author + ' > ' + message
                 client.send(bytes(complete_message, 'UTF-8'))
@@ -50,4 +53,4 @@ def main(target_host, target_port):
         print('Program forcefully stopped.')
 
 
-main('localhost', 50)
+main('localhost', 60)

@@ -13,18 +13,24 @@ def main(listening_port):
     # Set client into Listening mode and listen for incoming connections
     client.listen(5)
 
-    # While Loop to stay connected until Error occurs
+    print(colored('Connecting...', 'blue'))
     client_, addr = client.accept()
+    print(colored('Connected!', 'green'))
+
+    # Tell Attacker, Connection was received
+    print(colored('Successfully received connections from {0}'.format(addr), 'green'))
     # Opening a channel to communicate
     client_.send(bytes('Type "e" to exit anytime', 'UTF-8'))
+    print(colored('WARNING: You cannot change the Author later on!', 'yellow'))
     client_.send(bytes("\r\nAuthor > ", 'UTF-8'))
     author = input("Author > ")
 
-    print(colored('WARNING: You cannot change the value of Author later.', 'yellow'))
-
+    # While Loop to stay connected until Error occurs
     while True:
+        response = client_.recv(4096).decode('UTF-8')
+        if not response == '\r\nAuthor > ' or not response == '\r\nMessage > ':
+            print(response)
         message = input("Message > ")
-        response = client.recv(4096).decode('UTF-8')
         if message == 'e':
             break
 
@@ -38,4 +44,7 @@ def main(listening_port):
         client_.send(bytes(complete_message, 'UTF-8'))
 
 
-main(50)
+try:
+    main(60)
+except KeyboardInterrupt:
+    print('Program forcefully closed.')

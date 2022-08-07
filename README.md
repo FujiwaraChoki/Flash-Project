@@ -3,7 +3,7 @@ This Project is all about malware (malicious software). In this repository you'l
 All is written and made by me, an individual (Sami Hindi).
 
 # How to run
-To run this Key/Mouse-Logger, you must have python 3 or above installed, if you don't have python 3 or above installed on your machine,
+To run this All-Purpose Hacking-Tool, you must have python 3 or above installed, if you don't have python 3 or above installed on your machine,
 <a href="https://www.python.org/downloads/">download the most recent version of python</a> from their official website.
 
 # Docs

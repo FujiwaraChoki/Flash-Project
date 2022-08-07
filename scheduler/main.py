@@ -22,8 +22,8 @@ def main(is_run):
     if is_run:
         # Create an Instance of Scheduler Class
         scheduler = Scheduler()
-        # Store Interval in Seconds
-        interval_secs = 30
+        # Store Interval in Seconds, run every day twice
+        interval_secs = 43200
         # Add the schedule_task method to the scheduler
         scheduler.add_job(schedule_task, 'interval', seconds=interval_secs)
         # Start the Scheduler

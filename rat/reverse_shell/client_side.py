@@ -1,4 +1,5 @@
 # Method to call from other python files
+# TODO Fix bug so that User can also use cd command to change locations in terminal
 def main(target_host, target_port, path):
     with open(path, 'w') as file:
         file.write("""

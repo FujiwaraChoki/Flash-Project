@@ -4,7 +4,7 @@ from termcolor import colored
 
 
 def main(listening_port):
-    print('This program will setup a Listener at the following port: {0}'.format(listening_port))
+    print('This program will setup a Listener at the following port: '+str(listening_port))
 
     # Create Socket Object
     client = socket.socket()
@@ -39,5 +39,3 @@ def main(listening_port):
         except FileNotFoundError:
             print('Unknown Command...')
 
-
-main(69)

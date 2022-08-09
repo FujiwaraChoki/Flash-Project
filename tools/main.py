@@ -26,22 +26,21 @@ def flashconsole():
                 listen_rs(int(listening_port))
             elif 'flashddos --start' in input_command:
                 parts = input_command.split(" ")
-                # Target = 2, Proxy = 3, port = 4, threads = 5
-                target = parts[2]
-                proxy_file = parts[3]
-                threads = int(parts[4])
-                print(colored('Do you want a basic DDoS (b) or a SynFlood Attack (s)?', 'blue'))
-                choice = input()
+                ddos_type = parts[2]
+                target = parts[3]
+                proxy_file = parts[4]
+                threads = 0
+                if ddos_type == '-b':
+                    threads = int(parts[5])
                 while True:
-                    if choice == 'b':
+                    if ddos_type == '-b':
                         ddos_start(target, proxy_file, threads)
                         break
-                    elif choice == 's':
-                        synflood(target, proxy_file, threads)
+                    elif ddos_type == '-s':
+                        synflood_start(target, proxy_file)
                         break
                     else:
-                        print(colored('Invalid Choice, please choose again!', 'red'))
-                        continue
+                        print(colored('Invalid DDoS type choice, please choose again!', 'red'))
         except IndexError:
             print(colored('Make sure to give the right amount of arguments.', 'red'))
 
@@ -86,8 +85,8 @@ def listen_rs(listening_port):
     server_side.main(listening_port)
 
 
-def synflood(target, proxy_list, threads):
-    synflood.start(target, proxy_list, threads)
+def synflood_start(target, proxy_list):
+    synflood.synflood(target, proxy_list)
 
 
 print(colored('WELCOME TO FLASHCONSOLE!', 'blue'))

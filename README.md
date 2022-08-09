@@ -6,7 +6,7 @@ All is written and made by me, an individual (Sami Hindi).
 To run this All-Purpose Hacking-Tool, you must have python 3 or above installed, if you don't have python 3 or above installed on your machine,
 <a href="https://www.python.org/downloads/">download the most recent version of python</a> from their official website.
 
-# Docs
+# Documentation
 <h3><b>flashconsole</b></h3>
 The "flashconsole" is used to work with Reverse Shells.
 A Reverse Shell is when you get the victim computer to install malicious code or software on their system. When that file is run, you will have a fully interactive shell, where you can do all kidns of things.

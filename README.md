@@ -12,15 +12,26 @@ The "flashconsole" is used to work with Reverse Shells.
 A Reverse Shell is when you get the victim computer to install malicious code or software on their system. When that file is run, you will have a fully interactive shell, where you can do all kidns of things.
 Here are all the commands of the <b>flashconsole</b>:
 <ul>
-  <li>flashrs <--create/--listen> THOST=< TARGET_HOST > LHOST=< LISTENING_HOST > PORT=< PORT ></li>
+  <li><b>flashrs <--create/--listen> <OPTIONS></b></li>
     <ul>
       <li>--create  -  This will switch to creating mode, meaning it will create a backdoor file.</li>
+      <ul>
+        <li>First Positional Argument -> TARGET_HOST  -  Target Host specifies the hostname or IP the backdoor will send a connection to. This will only work if you and the victim are in the same network, except if you have Port-Forwarding enabled in your Router-Settings for that specific Port, or have setup an SSH-Tunnel (I recommend NGROK).</li>
+        <li>Second Positional Argument -> TARGET_PORT  -  Target Port specifies the port on which it will be sending the connection to the target host with
+      </ul>
       <li>--listen  -  Using --listen will switch to listening mode, which means the backdoor is installed on the victim's machine, but not run yet.
         <ul>
-          <li>TARGET_HOST  -  TARGET_HOST specifies the hostname or IP the backdoor will send a connection to. This will only work if you and the victim are in the same network, except if you have Port-Forwarding enabled in your Router-Settings for that specific Port, or have setup an SSH-Tunnel (I recommend NGROK).</li>
-          <li>LISTENING_HOST  -  This is the Bind-Address basically, it is usually localhost, which is set as the default.</li>
-          <li>PORT  -  Exactly what it says, this will specify the port you're using to connect to the vitim's machine.
+          <li>First Positional Argument -> LISTENING_HOST  -  This is the Bind-Address basically, it is usually localhost, which is set as the default.</li>
+          <li>Second Positional Argument -> PORT  -  Exactly what it says, this will specify the port you're using to connect to the vitim's machine.</li>
         </ul>
+    </ul>
+    <li><b>flashddos --start <OPTIONS></b></li>
+    <ul>
+      <li>Type  -  Specifies the type of Attack that will be sent. There are currently two available Attacks:</li>
+      <ul>
+        <li>-b  -  A basic DDoS Attack with Threading</li>
+        <li>-s  -  A Synflood Attack without Threading, since already powerful without</li>
+      </ul>
     </ul>
 </ul>
 

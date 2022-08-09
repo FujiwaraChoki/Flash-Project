@@ -30,7 +30,16 @@ Here are all the commands of the <b>flashconsole</b>:
       <li>Type  -  Specifies the type of Attack that will be sent. There are currently two available Attacks:</li>
       <ul>
         <li>-b  -  A basic DDoS Attack with Threading</li>
+        <ul>
+          <li>First Positional Argument -> Target  -  Specifies the target which the attack will be sent to</li>
+          <li>Second Positional Argument -> Proxy File Location  -  When running a DDoS Attack, proxies are inevitable if you do not want to get caught. So this argument specifies the location the proxy file. It should be stored in a combo, like this for example: <b>192.168.300.1:8080</b></li>
+          <li>Third Positional Argument -> Threads  -  This specifies the amount of Threads you want your Attack to run with, the recommended amount is 500 - 1000.</li>
+        </ul>
         <li>-s  -  A Synflood Attack without Threading, since already powerful without</li>
+        <ul>
+          <li>First Positional Argument -> Target  -  Specifies the target which the attack will be sent to</li>
+          <li>Second Positional Argument -> Proxy File Location  -  When running a DDoS Attack, proxies are inevitable if you do not want to get caught. So this argument specifies the location the proxy file. It should be stored in a combo, like this for example: <b>192.168.300.1:8080</b></li>
+        </ul>
       </ul>
     </ul>
 </ul>

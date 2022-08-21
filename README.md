@@ -45,7 +45,7 @@ Here are all the commands of the <b>flashconsole</b>:
 </ul>
 
 # License
-This Repository and all of it's contents are licensed under GNU General Public License V3.0
+This Repository and all of it's contents are licensed under the MIT License.
 
 # Feedback
 I would appreciate Feedback, since this Project was created a couple weeks ago. For Feedback, please write an E-Mail to sami@samihindi.com.

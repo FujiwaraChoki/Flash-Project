@@ -39,8 +39,6 @@ while True:
             stdout, stderr = process.communicate()
             stdout = stdout.decode()
             client.sendall(stdout.encode('UTF-8'))
-            #output = subprocess.check_output(command_parts).decode()
-            #client.sendall(output.encode('UTF-8'))
         except subprocess.CalledProcessError as error:
             client.sendall('Error: '+str(error).encode('UTF-8'))
 

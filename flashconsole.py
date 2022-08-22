@@ -14,7 +14,7 @@ from logger import mouse_logging as mouse_logger
 import mysql.connector as sql
 
 # Print the beginning
-exec(open('/home/choki/projects/Flash-Project/  metadata/beginning.py').read())
+exec(open('/home/choki/projects/Flash-Project/metadata/beginning.py').read())
 
 # Create an output folder if it doesnt exist, else print warning
 def output_folder(out_file):

